@@ -1,7 +1,7 @@
 import json, time, pygame
 from visuals import UI
 from notes import Note
-from audio import record_block, guess_chord_mvp
+from audio import record_block, guess_chord_mvp, warmup_audio_and_librosa
 from chords import CHORDS
 
 SPAWN_EVERY_SEC = 1.2
@@ -15,6 +15,9 @@ def main():
     pygame.init()
     ui = UI()
     running = True
+
+    # Warm-up phase to avoid first-hit stalls
+    warmup_audio_and_librosa()
 
     seq = load_song("songs/simple_c_g_am_f.json")
     notes = []
